@@ -1,52 +1,34 @@
-# device_api-iOS
+device_api-ios
+==============
 
-device_api-ios is the iOS implementation of device_api -- an initiative to allow full automation of device activities.
+iOS Device management abstraction
 
-## Dependencies
 
-<list of command line programs and other libraries needed to be installed>
+Quick Setup
+===========
 
-## Using the gem
 
-Add the device_api-ios gem to your gemfile -- this will automatically bring in the device_api base gem on which the iOS gem is built.
+Dependencies
+=============
+1. idevice_id,ideviceinstaller & ideviceinfo,osascript,ios-sim
+2. appium - Same installation process as given in devicehive setup file "iOSConfigReadme.md"
+3. fruitstrap
+4. Applications to be installed on real devices need to be provisioned using development certificates
 
-    gem 'device_api-ios'
-  
-You'll need to require the library in your code:
+Initialise
+---------
+require 'device_api/ios'
+device = DeviceAPI::IOS::Device.new(:serial=>'31e2867d4c59b81f5b8470b207066404ff1db058',:state => "ok",:type => "Device")
 
-    require 'device_api/ios'
 
-Try connecting an iOS device with usb, and run:
+Device info
+-----------
+device.model          		#  ""
 
-    device = DeviceAPI::iOS.devices
 
-<any other usage instructions here>
+Install/uninstall apk
+---------------------
+device.install(@app_path) 	 # where @app_path is the absolute path of the application provisioned for the device
+device.uninstall(@bundle_id) # where @bundle_id is the bundle_id of the app to be uninstalled (bundle_id = device.bundle_id_list[app name])
 
-### Detecting devices
 
-There are two methods for detecting devices:
-    DeviceAPI::iOS.devices 
-This returns an array of objects representing the connected devices. You get an empty array if there are no connected devices.
-    DeviceAPI::iOS.device(serial_id)
-    
-This looks for a device with a matching serial_id and returns a single device object.
-
-<any other device detection here>
-
-### Device object
-
-When device-api detects a device, it returns a device object that lets you interact with and query the device with various iOS tools.
-
-For example:
-    device = DeviceAPI::iOS.device(serial_id)
-    device.serial # "01498A0004005015"
-    device.model # "iPAD"
-
-#### Device orientation
-
-device.orientation # :landscape / :portrait
-
-## Testing
-
-device_api-ios is defended with unit and integration level rspec tests. You can run the tests with:
-    bundle exec rspec
