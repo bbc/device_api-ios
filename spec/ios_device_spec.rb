@@ -4,7 +4,6 @@ require 'device_api/execution'
 require 'device_api/ios/idevice'
 require 'device_api/ios/device'
 require 'yaml'
-require 'debugger'
 
 include RSpec
 
@@ -79,7 +78,6 @@ describe DeviceAPI::IOS do
     end
     
    it "Uninstalls the app from ios device" do
-    debugger
       res = @ios_device.uninstall(@local_bundle_id)
       expect( res ).to eq :success
       

@@ -6,7 +6,6 @@
 require 'device_api/device'
 require 'device_api/ios/idevice'
 require 'device_api/ios/simulator'
-require 'debugger'
 
 module DeviceAPI
   module IOS
@@ -80,7 +79,6 @@ module DeviceAPI
       # @return [String] bundle_id if application name is correct else false
       def bundle_id(app)
         fail DeviceCommandError, 'No app specified.', caller if app.empty?
-        debugger
         bundle_id_list = IDevice.bundle_id_list(serial) 
         res = bundle_id_list[app]
 

@@ -8,5 +8,4 @@ group :test do
   gem 'yaml'
   gem 'open3'
   gem 'ostruct'
-  gem 'debugger'
 end
