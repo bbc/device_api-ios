@@ -4,6 +4,7 @@ require 'device_api/execution'
 require 'device_api/ios/idevice'
 require 'device_api/ios/device'
 require 'yaml'
+require 'debugger'
 
 include RSpec
 
@@ -21,6 +22,7 @@ describe DeviceAPI::IOS do
     @arr_devices = DeviceAPI::IOS::IDevice.get_list_of_devices
     keys = @arr_devices[0].keys
     @test_device_uuid = keys[0]
+    @app_name = CONFIG["app_name"]
 
   end
 
@@ -37,15 +39,8 @@ describe DeviceAPI::IOS do
 
              
   end
+ 
   
-  describe ".model" do
-    
-    it "returns state of a device based on the device - When atleast one device is connected" do
-       expect( DeviceAPI::IOS::IDevice.get_state(@test_device_uuid)).to eq("Activated")
-    end
-
-
-  end
 
   describe ".install" do
 
@@ -70,19 +65,23 @@ describe DeviceAPI::IOS do
   describe ".uninstall" do
 
     before(:each) do
-      
+      @ios_device = DeviceAPI::IOS::Device.new(:serial=>@test_device_uuid,:state => "ok",:type => "Device")
+      app_bundle_list = @ios_device.bundle_id_list
+      app_names = app_bundle_list.keys
       result = DeviceAPI::Execution.execute("ideviceinstaller -u #{@test_device_uuid} -l")
-      if(result.stdout.include? @bundle_id and result.stderr=="")
-          DeviceAPI::Execution.execute("ideviceinstaller -u '#{@test_device_uuid}' -U #{@bundle_id}")
-       end 
 
-       @ios_device = DeviceAPI::IOS::Device.new(:serial=>@test_device_uuid,:state => "ok",:type => "Device")
-      
+      if(!app_names.include? @app_name)
+          DeviceAPI::Execution.execute("ideviceinstaller -u '#{@test_device_uuid}' -i #{@app_path}")
+          @local_bundle_id = (@ios_device.bundle_id_list)[@app_name]
+       else
+          @local_bundle_id = app_bundle_list[@app_name]
+       end 
     end
     
    it "Uninstalls the app from ios device" do
-      res = @ios_device.uninstall(@bundle_id)
-      expect( props ).to eq true
+    debugger
+      res = @ios_device.uninstall(@local_bundle_id)
+      expect( res ).to eq :success
       
     end
    
@@ -90,9 +89,12 @@ describe DeviceAPI::IOS do
   end
   
   describe ".get_props" do
+    before(:each) do
+      @ios_device = DeviceAPI::IOS::Device.new(:serial=>@test_device_uuid,:state => "ok",:type => "Device")
+    end
     
     it "Returns a hash of name value pair properties" do
-      props = DeviceAPI::IOS::IDevice.get_props(@test_device_uuid)
+      props = @ios_device.get_props
       expect( props ).to be_a Hash
       expect( props['ActivationState']).to eq('Activated')
     end

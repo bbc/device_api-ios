@@ -79,15 +79,15 @@ module DeviceAPI
         raise IDeviceCommandError.new(result.stderr) if result.exit != 0
 
         result = result.stdout.split("\n")
-        unless result.last.start_with?("Uninstall - Complete")
-           return false # error occurred
+        if result.last.start_with?("Uninstall - Complete")
+           return true
         else
           cmd = "ideviceinstaller -U '#{device_id}' -l"
           search_result = `#{cmd}`
           search_result = search_result.split("\n")
   
           search_result.each do |r|
-            if r.start_with?(app_name)
+            if r.start_with?(bundle_id)
                return false # Uninstall failed
             end
           end

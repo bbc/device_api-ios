@@ -6,6 +6,7 @@
 require 'device_api/device'
 require 'device_api/ios/idevice'
 require 'device_api/ios/simulator'
+require 'debugger'
 
 module DeviceAPI
   module IOS
@@ -70,44 +71,47 @@ module DeviceAPI
           when true
             :success
           else
-            fail DeviceCommandError, "Unable to install bundle_id :- #{bundle_id} Error Reported: #{res}", caller
+            fail DeviceCommandError, "Unable to uninstall bundle_id :- #{bundle_id} Error Reported: #{res}", caller
         end
       end
 
       # Returns the bundle id of the application name provided as param
       # @param app - the application name of the installed application 
-      # @return [String] bundle_id if application name is correct else raises DeviceCommandError
+      # @return [String] bundle_id if application name is correct else false
       def bundle_id(app)
         fail DeviceCommandError, 'No app specified.', caller if app.empty?
-        res = IDevice.bundle_id_list(serial)[app]
+        debugger
+        bundle_id_list = IDevice.bundle_id_list(serial) 
+        res = bundle_id_list[app]
 
-        case res
-          when !res.empty?
+        if res!=nil
             res
           else
-            fail DeviceCommandError, "application with name : #{app} was not found on the device", caller
+            false
         end
       end
 
       # Returns the bundle id of the application name provided as param
       # @return [Hash] key value pair of application name and bundle_id
       def bundle_id_list
-        fail DeviceCommandError, 'No app specified.', caller if app.empty?
-        res = IDevice.bundle_id_list(serial)[app]
-
-        case res
-          when !res.empty?
+        
+        res = IDevice.bundle_id_list(serial)
+        
+          if !res.empty?
             res
           else
-            fail DeviceCommandError, "application with name : #{app} was not found on the device", caller
+            fail DeviceCommandError, "Could not retrieve the list of applications and bundle ids", caller
         end
       end
-     
-      private
+
+      # Returns the hash of properties of the device
+      # @return [Hash] key value pair of property of device
 
       def get_props
           @props = IDevice.get_props(serial)
       end
+     
+      private
 
       def get_prop(key)
         if !@props || !@props[key]
