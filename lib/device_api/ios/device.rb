@@ -31,6 +31,10 @@ module DeviceAPI
         get_prop('DeviceClass')
       end
 
+      def imei
+        get_prop('InternationalMobileEquipmentIdentity')
+      end
+
       def trusted?
         IDevice.trusted?(serial)
       end
