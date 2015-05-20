@@ -1,36 +1,43 @@
-device_api-ios
-==============
-
-iOS Device management abstraction
+# device_api-ios
 
 
-Quick Setup
-===========
+device_api-ios is the iOS implementation of device_api - an initiative to allow full automation of device activities
 
+## Dependencies
 
-Dependencies
-=============
-1. idevice_id,ideviceinstaller & ideviceinfo,osascript,ios-sim
-2. appium - Same installation process as given in devicehive setup file "iOSConfigReadme.md"
-3. fruitstrap
-4. Applications to be installed on real devices need to be provisioned using development certificates
+device_api-ios shells out to a number of iOS command line tools. You will need to make sure that the libimobiledevice library is installed and the following commands are available on your path:
+* ideviceinfo
 
-Initialise
----------
-require 'device_api/ios'
+## Using the gem
 
-device = DeviceAPI::IOS::Device.new(:serial=>'31e2867d4c59b81f5b8470b207066404ff1db058',:state => "ok",:type => "Device")
+Add the device_api-ios gem to your gemfile - this will automatically bring in the device_api base gem on which the iOS gem is built.
 
+    gem 'device_api-ios'
 
-Device info
------------
-device.model          		#  "ME5C"
+You'll need to require the library in your code:
 
+    require 'device_api/ios'
 
-Install/uninstall apk
----------------------
-device.install(@app_path)		# where @app_path is the absolute path of the application provisioned for the device
-	
-device.uninstall(@bundle_id)	# where @bundle_id is the bundle_id of the app to be uninstalled (bundle_id = device.bundle_id_list[app name])
+Try connecting an iOS device with USB and run:
 
+    device = DeviceAPI::IOS.devices
 
+You might need to accept the 'Trust this computer' dialog on your device.
+
+### Detecting devices
+
+There are two methods for detecting devices:
+    DeviceAPI::IOS.devices
+This returns an array of objects representing the connected devices. You will get an empty array if there are no connected devices.
+    DeviceAPI::IOS.device(serial_id)
+This looks for a device with a matching serial_id and returns a single device object.
+
+### Device object
+
+When device-api-detects a device, it returns a device object that lets you interact with and query the device with various iOS tools.
+
+For example:
+
+        device = DeviceAPI::IOS.device(serial_id)
+        device.serial # '50d9299992726df277bg6befdf88e1704f4f8f8b'
+        device.model # 'iPad mini 3'
