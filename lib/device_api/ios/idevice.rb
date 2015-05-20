@@ -2,8 +2,11 @@ require 'device_api/execution'
 
 module DeviceAPI
   module IOS
+    # Namespace for all methods encapsulating idevice calls
     class IDevice < Execution
 
+      # Returns an array of hashes representing connected devices
+      # @return (Array) Hash containing serial and device name
       def self.devices
         result = execute_with_timeout_and_retry('idevice_id -l')
 
@@ -21,13 +24,15 @@ module DeviceAPI
       end
 
       # Check to see if device has trusted the computer
+      # @param device_id uuid of the device
+      # @return true if the device returns information to ideviceinfo, otherwise false
       def self.trusted?(device_id)
         result = execute("ideviceinfo -u '#{device_id}'")
         return true if result.exit == 0
         false
       end
 
-      # Returns the Hash containing properties of real ios device using idevice_id -l command , Need idevice_id installed on the machine,(brew install idevice_id -l)
+      # Returns a Hash containing properties of the specified device using idevice_id.
       # @param device_id uuid of the device
       # @return (Hash) key value pair of properties
       def self.get_props(device_id)
