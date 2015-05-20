@@ -1,9 +1,0 @@
-## Real Device
-bundle_id: safarilauncher
-#Relative to device_api-ios dir - Provisioned to the device , app is to be installed
-app_path: lib/resources/SafariLauncher.app
-app_name: SafariLauncher
-
-## ios simulator 
-
-ios_sim_scpt: lib/resources/ios_sim.scpt
