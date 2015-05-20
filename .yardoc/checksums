@@ -1,4 +1,0 @@
-lib/deviceapi.rb f4669bee7443c021efd9ead4cba89b40560fc03c
-lib/device_api/ios/device.rb 8fd6b2b3f6486391c0e0d944efb4e25b9e314a76
-lib/device_api/ios/idevice.rb a4f11c84f4dbe573ccbdfdf0a4015fb71444c41d
-lib/device_api/ios/simulator.rb dc8686c9160fb28ad140c3f38db12d68b49a915a
