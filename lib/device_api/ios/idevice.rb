@@ -1,6 +1,8 @@
 require 'device_api/execution'
 
+# DeviceAPI - an interface to allow for automation of devices
 module DeviceAPI
+  # iOS component of DeviceAPI
   module IOS
     # Namespace for all methods encapsulating idevice calls
     class IDevice < Execution
