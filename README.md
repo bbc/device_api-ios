@@ -1,11 +1,11 @@
-# device_api-ios
+# DeviceAPI-IOS
 
 
-device_api-ios is the iOS implementation of device_api - an initiative to allow full automation of device activities
+*DeviceAPI-IOS* is the iOS implementation of *DeviceAPI* - an initiative to allow full automation of device activities
 
 ## Dependencies
 
-device_api-ios shells out to a number of iOS command line tools. You will need to make sure that the libimobiledevice library is installed and the following commands are available on your path:
+*DeviceAPI-IOS* shells out to a number of iOS command line tools. You will need to make sure that the libimobiledevice library is installed and the following commands are available on your path:
 * ideviceinfo
 
 ## Using the gem
@@ -20,7 +20,7 @@ You'll need to require the library in your code:
 
 Try connecting an iOS device with USB and run:
 
-    device = DeviceAPI::IOS.devices
+    devices = DeviceAPI::IOS.devices
 
 You might need to accept the 'Trust this computer' dialog on your device.
 
@@ -34,10 +34,16 @@ This looks for a device with a matching serial_id and returns a single device ob
 
 ### Device object
 
-When device-api-detects a device, it returns a device object that lets you interact with and query the device with various iOS tools.
+When *DeviceAPI* detects a device, it returns a device object that lets you interact with and query the device with various iOS tools.
 
 For example:
 
         device = DeviceAPI::IOS.device(serial_id)
         device.serial # '50d9299992726df277bg6befdf88e1704f4f8f8b'
         device.model # 'iPad mini 3'
+
+## License
+
+*DeviceAPI-Android* is available to everyone under the terms of the MIT open source licence. Take a look at the LICENSE file in the code.
+
+Copyright (c) 2015 BBC
