@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name        = 'device_api-ios'
-  s.version     = '1.0.0'
+  s.version     = '1.0.1'
   s.date        = Time.now.strftime("%Y-%m-%d")
   s.summary     = 'IOS Device Management API'
   s.description = 'iOS implementation of DeviceAPI'
-  s.authors     = ['Jon Wilson', 'Kedar Barde']
+  s.authors     = ['BBC', 'Jon Wilson', 'Kedar Barde']
   s.email       = ['jon.wilson01@bbc.co.uk', 'kedar_barde@mindtree.com']
   s.files       = `git ls-files`.split "\n"
   s.homepage    = 'https://github.com/bbc/device_api-ios'
