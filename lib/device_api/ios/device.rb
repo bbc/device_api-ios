@@ -54,6 +54,36 @@ module DeviceAPI
         IDevice.trusted?(serial)
       end
 
+      # Install a specified IPA
+      # @param [String] ipa string containing path to the IPA to install
+      # @return [Symbol, Exception] :success when the IPA installed successfully, otherwise an error is raised
+      def install(ipa)
+        fail StandardError, 'No IPA or app specified.', caller if ipa.empty?
+
+        res = install_ipa(ipa)
+
+        case res
+          when 'Complete'
+            :success
+          else
+            fail StandardError, res, caller
+        end
+      end
+
+      # Uninstall a specified package
+      # @param [String] package_name string containing name of package to uninstall
+      # @return [Symbol, Exception] :success when the package is uninstalled successfully, otherwise an error is raised
+      def uninstall(package_name)
+        res = uninstall_package(package_name)
+
+        case res
+          when 'Complete'
+            :success
+          else
+            fail StandardError, "Unable to uninstall '#{package_name}'. Error reported: #{res}", caller
+        end
+      end
+
       private
 
       def get_prop(key)
@@ -63,6 +93,13 @@ module DeviceAPI
         @props[key]
       end
 
+      def install_ipa(ipa)
+        IDeviceInstaller.install_ipa(ipa: ipa, serial: serial)
+      end
+
+      def uninstall_package(package_name)
+        IDeviceInstaller.uninstall_package(package: package_name, serial: serial)
+      end
     end
   end
 end

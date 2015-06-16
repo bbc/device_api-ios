@@ -10,5 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/bbc/device_api-ios'
   s.license     = 'MIT'
   s.add_runtime_dependency 'device_api', '>=1.0', '<2.0'
+  s.add_runtime_dependency 'ios-devices'
   s.add_development_dependency 'rspec'
 end
