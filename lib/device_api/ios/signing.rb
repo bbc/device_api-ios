@@ -37,6 +37,31 @@ module DeviceAPI
 
         true
       end
+
+      def self.sign_app(options = {})
+        cert          = options[:cert]
+        entitlements  = options[:entitlements]
+        app           = options[:app]
+
+        result = execute("codesign --force --sign #{cert} --entitlements #{entitlements} '#{app}'")
+
+        raise SigningCommandError.new(result.stderr) if result.exit != 0
+
+      end
+
+      def self.get_signing_certs
+        result = execute('security find-identity -p codesigning -v')
+
+        raise SigningCommandError.new(result.stderr) if result.exit != 0
+
+        certs = []
+        result.stdout.split("\n").each do |line|
+          if /\)\s*(\S*)\s*"(.*)"/.match(line)
+            certs << { id: Regexp.last_match[1], name: Regexp.last_match[2] }
+          end
+        end
+        certs
+      end
     end
 
     # Signing error class
