@@ -8,6 +8,7 @@ module DeviceAPI
     # Namespace for all methods encapsulating idevice calls
     class Signing < Execution
 
+      # Check to see if the path is an IPA
       def self.is_ipa?(path)
         return true if (File.extname path).downcase == '.ipa'
         false
