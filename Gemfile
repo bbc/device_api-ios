@@ -3,6 +3,7 @@ source 'https://gems.cloud.bbc.co.uk'
 
 gem 'device_api', '>=1.0.0'
 gem 'ios-devices'
+gem 'nokogiri'
 
 group :test do
   gem 'rspec'
