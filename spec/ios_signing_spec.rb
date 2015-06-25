@@ -41,5 +41,4 @@ eos
       expect(DeviceAPI::IOS::Signing.get_signing_certs.count).to eq(3)
     end
   end
-
 end
