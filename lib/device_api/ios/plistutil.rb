@@ -30,6 +30,8 @@ module DeviceAPI
       def self.get_bundle_id_from_plist(plist)
         raise PlistutilCommandError.new('plistutil not found') unless plistutil_available?
         result = execute("plistutil -i #{plist}")
+        require 'pry'
+        binding.pry
         raise PlistutilCommandError.new(result.stderr) if result.exit != 0
         info = Nokogiri::XML.parse(result.stdout)
         nodes = info.xpath('//dict').first

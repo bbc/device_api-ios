@@ -57,9 +57,16 @@ module DeviceAPI
 
       # Get the app bundle ID from the specified app
       # @return [String] app bundle id
-      def get_bundle_id(app)
+      def package_name(app)
         app_info = Plistutil.get_bundle_id_from_app(app)
         app_info['CFBundleIdentifier']
+      end
+
+      # Get the app version from the specified app
+      # @return [String] app version
+      def app_version_number(app)
+        app_info = Plistutil.get_bundle_id_from_app(app)
+        app_info['CFBundleVersion']
       end
 
       private
