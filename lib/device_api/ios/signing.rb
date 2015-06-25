@@ -1,5 +1,4 @@
 require 'device_api/execution'
-require 'pry'
 
 # DeviceAPI - an interface to allow for automation of devices
 module DeviceAPI
