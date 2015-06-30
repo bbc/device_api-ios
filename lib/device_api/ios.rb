@@ -2,6 +2,7 @@ require 'yaml'
 require 'device_api/ios/device'
 require 'device_api/ios/idevice'
 require 'device_api/ios/ideviceinstaller'
+require 'device_api/ios/ideviceprovision'
 
 module DeviceAPI
   module IOS
