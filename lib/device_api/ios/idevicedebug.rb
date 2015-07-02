@@ -1,5 +1,3 @@
-require 'timeout'
-
 # DeviceAPI - an interface to allow for automation of devices
 module DeviceAPI
   # iOS component of DeviceAPI
