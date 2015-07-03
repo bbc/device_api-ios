@@ -1,6 +1,7 @@
 require 'yaml'
 require 'device_api/ios/device'
 require 'device_api/ios/idevice'
+require 'device_api/ios/ideviceinstaller'
 require 'device_api/ios/signing'
 require 'device_api/ios/plistutil'
 
