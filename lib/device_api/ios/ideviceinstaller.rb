@@ -73,7 +73,7 @@ module DeviceAPI
         installed_packages = list_installed_packages(serial)
 
         matches = installed_packages.select { |_, values| values[:package_name] == package }
-        return !matches.nil?
+        return !matches.empty?
       end
     end
 
