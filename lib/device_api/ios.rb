@@ -22,7 +22,7 @@ module DeviceAPI
       if serial.to_s.empty?
         raise DeviceAPI::BadSerialString.new("Serial was '#{ serial.nil? ? 'nil' : serial }'")
       end
-      DeviceAPI::IOS::Device.new(serial: serial, state: 'ok')
+      DeviceAPI::IOS::Device.new(serial: serial, state: 'device')
     end
   end
 end
