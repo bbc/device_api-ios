@@ -54,6 +54,10 @@ module DeviceAPI
         IDevice.trusted?(serial)
       end
 
+      def ip_address
+        IPAddress.address(serial)
+      end
+
       # Install a specified IPA
       # @param [String] ipa string containing path to the IPA to install
       # @return [Symbol, Exception] :success when the IPA installed successfully, otherwise an error is raised
