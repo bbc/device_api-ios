@@ -54,6 +54,8 @@ module DeviceAPI
         IDevice.trusted?(serial)
       end
 
+      # Get the IP Address from the device
+      # @return [String] IP Address of current device
       def ip_address
         IPAddress.address(serial)
       end
@@ -66,12 +68,8 @@ module DeviceAPI
 
         res = install_ipa(ipa)
 
-        case res
-          when 'Complete'
-            :success
-          else
-            fail StandardError, res, caller
-        end
+        fail StandardError, res, caller unless res == :success
+        res
       end
 
       # Uninstall a specified package
@@ -80,12 +78,8 @@ module DeviceAPI
       def uninstall(package_name)
         res = uninstall_package(package_name)
 
-        case res
-          when 'Complete'
-            :success
-          else
-            fail StandardError, "Unable to uninstall '#{package_name}'. Error reported: #{res}", caller
-        end
+        fail StandardError, res, caller unless res == :success
+        res
       end
 
       private
