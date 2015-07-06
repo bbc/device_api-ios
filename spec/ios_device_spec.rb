@@ -9,7 +9,7 @@ describe DeviceAPI::IOS do
 
   describe ".model" do
 
-    it "returns model of device" do
+    it 'returns the model of the attached device' do
       device = DeviceAPI::IOS.device('123456')
       expect(device.model).to eq('Unknown iOS device')
     end
