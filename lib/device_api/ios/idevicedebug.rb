@@ -20,7 +20,7 @@ module DeviceAPI
 
         result = execute("doalarm () { perl -e 'alarm shift; exec @ARGV' \"$@\"; }; doalarm #{timeout} idevicedebug -u #{serial} -d run #{bundle_id}")
 
-        raise IDeviceDebugError.new(result.stderr) unless [255, 142].include?(result.exit)
+        raise IDeviceDebugError.new(result.stderr) unless [0, 255, 142].include?(result.exit)
 
         result.stdout.split("\r\n")
       end

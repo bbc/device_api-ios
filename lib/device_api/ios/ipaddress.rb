@@ -1,4 +1,5 @@
 require 'device_api/ios/idevicedebug'
+require 'device_api/ios/ideviceinstaller'
 
 # DeviceAPI - an interface to allow for automation of devices
 module DeviceAPI
