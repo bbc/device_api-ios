@@ -84,6 +84,14 @@ module DeviceAPI
         end
       end
 
+      def type
+        if device_class.downcase == 'ipad'
+          :tablet
+        else
+          :mobile
+        end
+      end
+
       private
 
       def get_prop(key)
