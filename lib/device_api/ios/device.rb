@@ -84,6 +84,8 @@ module DeviceAPI
         end
       end
 
+      # Return whether or not the device is a tablet or mobile
+      # @return [Symbol] :tablet or :mobile depending on device_class
       def type
         if device_class.downcase == 'ipad'
           :tablet
