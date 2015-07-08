@@ -4,6 +4,8 @@ require 'device_api/ios/idevice'
 require 'device_api/ios/ideviceinstaller'
 require 'device_api/ios/signing'
 require 'device_api/ios/plistutil'
+require 'device_api/ios/idevicedebug'
+require 'device_api/ios/ipaddress'
 require 'device_api/ios/ideviceprovision'
 
 module DeviceAPI
@@ -23,7 +25,7 @@ module DeviceAPI
       if serial.to_s.empty?
         raise DeviceAPI::BadSerialString.new("Serial was '#{ serial.nil? ? 'nil' : serial }'")
       end
-      DeviceAPI::IOS::Device.new(serial: serial, state: 'ok')
+      DeviceAPI::IOS::Device.new(serial: serial, state: 'device')
     end
   end
 end

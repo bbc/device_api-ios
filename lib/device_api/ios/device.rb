@@ -69,34 +69,32 @@ module DeviceAPI
         app_info['CFBundleVersion']
       end
 
+      # Get the IP Address from the device
+      # @return [String] IP Address of current device
+      def ip_address
+        IPAddress.address(serial)
+      end
+
       # Install a specified IPA
       # @param [String] ipa string containing path to the IPA to install
-      # @return [Symbol, Exception] :success when the IPA installed successfully, otherwise an error is raised
+      # @return [Boolean, Exception] true when the IPA installed successfully, otherwise an error is raised
       def install(ipa)
         fail StandardError, 'No IPA or app specified.', caller if ipa.empty?
 
         res = install_ipa(ipa)
 
-        case res
-          when 'Complete'
-            :success
-          else
-            fail StandardError, res, caller
-        end
+        fail StandardError, res, caller unless res
+        true
       end
 
       # Uninstall a specified package
       # @param [String] package_name string containing name of package to uninstall
-      # @return [Symbol, Exception] :success when the package is uninstalled successfully, otherwise an error is raised
+      # @return [Boolean, Exception] true when the package is uninstalled successfully, otherwise an error is raised
       def uninstall(package_name)
         res = uninstall_package(package_name)
 
-        case res
-          when 'Complete'
-            :success
-          else
-            fail StandardError, "Unable to uninstall '#{package_name}'. Error reported: #{res}", caller
-        end
+        fail StandardError, res, caller unless res
+        true
       end
 
       # Return whether or not the device is a tablet or mobile
