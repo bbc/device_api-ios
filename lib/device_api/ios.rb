@@ -4,6 +4,7 @@ require 'device_api/ios/idevice'
 require 'device_api/ios/ideviceinstaller'
 require 'device_api/ios/signing'
 require 'device_api/ios/plistutil'
+require 'device_api/ios/ideviceprovision'
 
 module DeviceAPI
   module IOS
