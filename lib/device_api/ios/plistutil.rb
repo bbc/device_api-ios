@@ -1,6 +1,6 @@
 require 'device_api/execution'
 require 'device_api/ios/signing'
-require 'nokogiri'
+require 'ox'
 
 # DeviceAPI - an interface to allow for automation of devices
 module DeviceAPI
@@ -30,18 +30,18 @@ module DeviceAPI
       def self.get_bundle_id_from_plist(plist)
         raise PlistutilCommandError.new('plistutil not found') unless plistutil_available?
         result = execute("plistutil -i #{plist}")
-        require 'pry'
-        binding.pry
         raise PlistutilCommandError.new(result.stderr) if result.exit != 0
-        info = Nokogiri::XML.parse(result.stdout)
-        nodes = info.xpath('//dict').first
+        info = Ox.parse(result.stdout)
+        nodes = info.locate('*/dict')
         values = {}
         last_key = nil
-        nodes.children.each do |node|
-          if node.name == 'key'
-            last_key = node.text
-          elsif node.name == 'string'
-            values[last_key] = node.text
+        nodes.each do |node|
+          node.nodes.each do |child|
+            if child.value == 'key'
+              last_key = child.nodes.first
+            elsif child.value == 'string'
+              values[last_key] = child.nodes.first
+            end
           end
         end
         values
