@@ -10,7 +10,7 @@ module DeviceAPI
       # @param [Hash] options options for installing the app
       # @option options [String] :ipa path to the IPA to install
       # @option options [String] :serial serial of the target device
-      # @return [Symbol] :success if successful, otherwise :failure
+      # @return [Boolean] true if successful, otherwise false
       def self.install_ipa(options = {})
         ipa = options[:ipa]
         serial = options[:serial]
@@ -20,15 +20,15 @@ module DeviceAPI
 
         lines = result.stdout.split("\n").map { |line| line.gsub('-','').strip }
 
-        return :success if lines.last.match('Complete')
-        :failure
+        return true if lines.last.match('Complete')
+        false
       end
 
       # Uninstalls a specified package from a device
       # @param [Hash] options options for uninstalling the app
       # @option options [String] :package bundle ID of the package to be uninstalled
       # @option options [String] :serial serial of the target device
-      # @return [Symbol] :success if successful, otherwise :failure
+      # @return [Boolean] true if successful, otherwise false
       def self.uninstall_package(options = {})
         package = options[:package]
         serial = options[:serial]
@@ -38,8 +38,8 @@ module DeviceAPI
 
         lines = result.stdout.split("\n").map { |line| line.gsub('-', '').strip }
 
-        return :success if lines.last.match('Complete')
-        :failure
+        return true if lines.last.match('Complete')
+        false
       end
 
       # Lists packages installed on the specified device

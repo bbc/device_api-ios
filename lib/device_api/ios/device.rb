@@ -68,7 +68,7 @@ module DeviceAPI
 
         res = install_ipa(ipa)
 
-        fail StandardError, res, caller unless res == :success
+        fail StandardError, res, caller unless res
         true
       end
 
@@ -78,7 +78,7 @@ module DeviceAPI
       def uninstall(package_name)
         res = uninstall_package(package_name)
 
-        fail StandardError, res, caller unless res == :success
+        fail StandardError, res, caller unless res
         true
       end
 
