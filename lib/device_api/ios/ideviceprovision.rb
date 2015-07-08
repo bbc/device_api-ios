@@ -28,8 +28,7 @@ module DeviceAPI
 
         profiles = list_profiles(serial)
 
-        return true if profiles.key?(uuid) || profiles.value?(name)
-        false
+        profiles.key?(uuid) || profiles.value?(name)
       end
 
       # Removes the specified profile from the device
