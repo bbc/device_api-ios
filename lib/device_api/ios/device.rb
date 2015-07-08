@@ -62,24 +62,24 @@ module DeviceAPI
 
       # Install a specified IPA
       # @param [String] ipa string containing path to the IPA to install
-      # @return [Symbol, Exception] :success when the IPA installed successfully, otherwise an error is raised
+      # @return [Boolean, Exception] true when the IPA installed successfully, otherwise an error is raised
       def install(ipa)
         fail StandardError, 'No IPA or app specified.', caller if ipa.empty?
 
         res = install_ipa(ipa)
 
         fail StandardError, res, caller unless res == :success
-        res
+        true
       end
 
       # Uninstall a specified package
       # @param [String] package_name string containing name of package to uninstall
-      # @return [Symbol, Exception] :success when the package is uninstalled successfully, otherwise an error is raised
+      # @return [Boolean, Exception] true when the package is uninstalled successfully, otherwise an error is raised
       def uninstall(package_name)
         res = uninstall_package(package_name)
 
         fail StandardError, res, caller unless res == :success
-        res
+        true
       end
 
       private
