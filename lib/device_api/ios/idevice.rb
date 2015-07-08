@@ -30,7 +30,8 @@ module DeviceAPI
       # @return true if the device returns information to ideviceinfo, otherwise false
       def self.trusted?(device_id)
         result = execute("ideviceinfo -u '#{device_id}'")
-        return true if result.exit == 0
+
+        return true if result.exit == 0 && !result.stdout.split("\n")[0].match('Usage')
         false
       end
 
