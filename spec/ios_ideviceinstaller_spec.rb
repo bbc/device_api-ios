@@ -38,7 +38,7 @@ end
         [output, '', (Struct.new(:exitstatus)).new(0)]
       end
       result = DeviceAPI::IOS::IDeviceInstaller.install_ipa(serial: '123456', ipa: 'iplayer.ipa' )
-      expect(result).to eq(:success)
+      expect(result).to eq(true)
     end
   end
 
@@ -54,7 +54,7 @@ end
         [output, '', (Struct.new(:exitstatus)).new(0)]
       end
       result = DeviceAPI::IOS::IDeviceInstaller.uninstall_package(package: 'uk.co.bbc.iplayer', serial: '123456')
-      expect(result).to eq(:success)
+      expect(result).to eq(true)
     end
 
     it 'fails to remove an app that is not installed' do
@@ -68,7 +68,7 @@ end
         [output, '', (Struct.new(:exitstatus)).new(0)]
       end
       result = DeviceAPI::IOS::IDeviceInstaller.uninstall_package(package: 'uk.co.bbc.iplaye', serial: '123456')
-      expect(result).to eq(:failure)
+      expect(result).to eq(false)
     end
   end
 
