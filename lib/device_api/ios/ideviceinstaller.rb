@@ -12,16 +12,8 @@ module DeviceAPI
       # @option options [String] :serial serial of the target device
       # @return [Boolean] true if successful, otherwise false
       def self.install_ipa(options = {})
-        ipa = options[:ipa]
-        serial = options[:serial]
-        result = execute("ideviceinstaller -u '#{serial}' -i '#{ipa}'")
-
-        raise IDeviceInstallerError.new(result.stderr) if result.exit != 0
-
-        lines = result.stdout.split("\n").map { |line| line.gsub('-','').strip }
-
-        return true if lines.last.match('Complete')
-        false
+        options[:action] = :install
+        change_package(options)
       end
 
       # Uninstalls a specified package from a device
@@ -30,9 +22,26 @@ module DeviceAPI
       # @option options [String] :serial serial of the target device
       # @return [Boolean] true if successful, otherwise false
       def self.uninstall_package(options = {})
+        options[:action] = :uninstall
+        change_package(options)
+      end
+
+      def self.change_package(options = {})
         package = options[:package]
+        ipa = options[:ipa]
         serial = options[:serial]
-        result = execute("ideviceinstaller -u '#{serial}' -U '#{package}'")
+        action = options[:action]
+
+        command = nil
+        if action == :install
+          command = "ideviceinstaller -u '#{serial}' -i '#{ipa}'"
+        elsif action == :uninstall
+          command = "ideviceinstaller -u '#{serial}' -U '#{package}'"
+        end
+
+        raise IDeviceInstallerError.new('No action specified') if command.nil?
+
+        result = execute(command)
 
         raise IDeviceInstallerError.new(result.stderr) if result.exit != 0
 
