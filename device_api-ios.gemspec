@@ -11,5 +11,6 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.add_runtime_dependency 'device_api', '>=1.0', '<2.0'
   s.add_runtime_dependency 'ios-devices'
+  s.add_runtime_dependency 'ox'
   s.add_development_dependency 'rspec'
 end
