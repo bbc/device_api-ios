@@ -5,7 +5,4 @@ gem 'ios-devices'
 
 group :test do
   gem 'rspec'
-  gem 'yaml'
-  gem 'open3'
-  gem 'ostruct'
 end
