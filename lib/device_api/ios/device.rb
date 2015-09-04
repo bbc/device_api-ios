@@ -69,10 +69,6 @@ module DeviceAPI
         app_info['CFBundleVersion']
       end
 
-      def replace_bundle_id(new_id, file)
-        Plistutil.replace_bundle_id(new_id: new_id, file: file)
-      end
-
       # Get the IP Address from the device
       # @return [String] IP Address of current device
       def ip_address
