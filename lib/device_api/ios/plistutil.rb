@@ -46,26 +46,6 @@ module DeviceAPI
         end
         values
       end
-
-      def self.replace_bundle_id(options = {})
-        if options.key?(:file)
-          xml = IO.read(options[:file])
-        elsif options.key?(:xml)
-          xml = options[:xml]
-        end
-
-        raise PlistutilCommandError.new('No XML was passed') unless xml
-
-        replacements = xml.scan(/.*CFBundleIdentifier<\/key>\n\t<string>(.*?)<\/string>/)
-        replacements << xml.scan(/.*CFBundleName<\/key>\n\t<string>(.*?)<\/string>/)
-
-        replacements.flatten.uniq.each do |replacement|
-          xml = xml.gsub(replacement, options[:new_id])
-        end
-
-        IO.write(options[:file], xml) if options.key?(:file)
-        xml
-      end
     end
 
     # plistutil error class
