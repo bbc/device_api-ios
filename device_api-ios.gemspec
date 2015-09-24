@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'device_api-ios'
-  s.version     = '1.0.1'
+  s.version     = '1.0.2'
   s.date        = Time.now.strftime("%Y-%m-%d")
   s.summary     = 'IOS Device Management API'
   s.description = 'iOS implementation of DeviceAPI'
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/bbc/device_api-ios'
   s.license     = 'MIT'
   s.add_runtime_dependency 'device_api', '>=1.0', '<2.0'
-  s.add_runtime_dependency 'ios-devices'
-  s.add_runtime_dependency 'ox'
+  s.add_runtime_dependency 'ios-devices', '>=0.2'
+  s.add_runtime_dependency 'ox', '>=2.1.0'
   s.add_development_dependency 'rspec'
 end
