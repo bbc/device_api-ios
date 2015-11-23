@@ -75,6 +75,12 @@ module DeviceAPI
         IPAddress.address(serial)
       end
 
+      # Get the Wifi Mac address for the current device
+      # @return [String] Mac address of current device
+      def wifi_mac_address
+        get_prop('WiFiAddress')
+      end
+
       # Install a specified IPA
       # @param [String] ipa string containing path to the IPA to install
       # @return [Boolean, Exception] true when the IPA installed successfully, otherwise an error is raised
