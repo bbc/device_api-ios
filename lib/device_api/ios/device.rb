@@ -2,6 +2,7 @@ require 'device_api/device'
 require 'device_api/ios/device'
 require 'device_api/ios/idevice'
 require 'device_api/ios/plistutil'
+require 'device_api/ios/idevicename'
 require 'ios/devices'
 
 # DeviceAPI - an interface to allow for automation of devices
@@ -23,6 +24,12 @@ module DeviceAPI
             'no device' => :dead,
             'offline' => :offline
         }[@state]
+      end
+
+      # Look up device name - i.e. Bob's iPhone
+      # @return (String) iOS device name
+      def name
+        IDeviceName.name(serial)
       end
 
       # Look up device model using the ios-devices gem - changing 'iPad4,7' to 'iPad mini 3'

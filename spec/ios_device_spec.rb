@@ -35,6 +35,17 @@ end
       device = DeviceAPI::IOS.device('123456')
       expect(device.status).to eq(:ok)
     end
+
+    it 'returns the device name' do
+      output = <<-end
+        Test Device
+      end
+      allow(Open3).to receive(:capture3) {
+        [output, '', (Struct.new(:exitstatus)).new(0)]
+      }
+      device = DeviceAPI::IOS.device('123456')
+      expect(device.name).to eq('Test Device')
+    end
   end
 end
 
