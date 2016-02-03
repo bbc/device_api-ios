@@ -15,7 +15,7 @@ module DeviceAPI
       end
     end
 
-    # Error class for the IDeviceDebug class
+    # Error class for the IDeviceName class
     class IDeviceNameError < StandardError
       def initialize(msg)
         super(msg)
