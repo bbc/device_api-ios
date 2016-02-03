@@ -7,6 +7,7 @@ require 'device_api/ios/plistutil'
 require 'device_api/ios/idevicedebug'
 require 'device_api/ios/ipaddress'
 require 'device_api/ios/ideviceprovision'
+require 'device_api/ios/idevicename'
 
 module DeviceAPI
   module IOS
