@@ -1,4 +1,5 @@
 require 'device_api/execution'
+require 'device_api/ios/plistutil'
 
 # DeviceAPI - an interface to allow for automation of devices
 module DeviceAPI
@@ -61,6 +62,32 @@ module DeviceAPI
           end
         end
         certs
+      end
+
+      def self.get_entitlements(app_path, raw = false)
+        app_path = unpack_ipa(app_path) if is_ipa?(app_path)
+        result = execute("codesign -d --entitlements - #{app_path}")
+
+        if result.exit != 0
+          raise SigningCommandError.new(result.stderr)
+        end
+
+        # Clean up the result as it occasionally contains invalid UTF-8 characters
+        xml = result.stdout.to_s.encode('UTF-8', 'UTF-8', invalid: :replace)
+        xml = xml[xml.index('<')..xml.length]
+
+        return xml if raw
+        entitlements = Plistutil.parse_xml(xml)
+        return entitlements
+      end
+
+      def self.enable_get_tasks(app_path)
+        entitlements = get_entitlements(app_path)
+
+        return true if entitlements['get-task-allow'] == "true"
+
+        xml = get_entitlements(app_path, raw: true)
+        xml.gsub('<false/>', '<true/>')
       end
     end
 
