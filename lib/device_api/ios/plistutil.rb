@@ -39,17 +39,15 @@ module DeviceAPI
         nodes = info.locate('*/dict')
         values = {}
         last_key = nil
-        nodes.each do |node|
-          node.nodes.each do |child|
-            if child.value == 'key'
-              if child.nodes.first == 'get-task-allow'
-                values['get-task-allow'] = node.nodes[node.nodes.index(child)+1].value
-                next
-              end
-              last_key = child.nodes.first
-            elsif child.value == 'string'
-              values[last_key] = child.nodes.first
+        nodes.first.nodes.each do |child|
+          if child.value == 'key'
+            if child.nodes.first == 'get-task-allow'
+              values['get-task-allow'] = nodes.first.nodes[nodes.first.nodes.index(child)+1].value
+              next
             end
+            last_key = child.nodes.first
+          elsif child.value == 'string'
+            values[last_key] = child.nodes.first
           end
         end
         values
