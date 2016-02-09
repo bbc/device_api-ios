@@ -97,7 +97,7 @@ describe DeviceAPI::IOS::Signing do
       allow(Open3).to receive(:capture3) {
         [plist, '', (Struct.new(:exitstatus)).new(0)]
       }
-      expect(DeviceAPI::IOS::Signing.enable_get_tasks('/Users/wilsoj95/code/rtmpdump/iplayer.ipa')).to eq(expected)
+      expect(DeviceAPI::IOS::Signing.enable_get_tasks('test.ipa')).to eq(expected)
     end
   end
 end
