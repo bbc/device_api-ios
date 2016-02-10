@@ -57,13 +57,12 @@ module DeviceAPI
           file.close
           entitlements = file.path
         end
+
         result = execute("codesign --force --sign '#{cert}' --entitlements #{entitlements} '#{app}'")
 
         raise SigningCommandError.new(result.stderr) if result.exit != 0
 
-        if original_app
-          zip_app(app, original_app)
-        end
+        zip_app(app, original_app) if original_app
       end
 
       def self.zip_app(payload_path, ipa_path)
