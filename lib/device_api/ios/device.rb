@@ -1,7 +1,6 @@
 require 'device_api/device'
 require 'device_api/ios/device'
 require 'device_api/ios/idevice'
-require 'device_api/ios/plistutil'
 require 'device_api/ios/idevicename'
 require 'ios/devices'
 
@@ -60,20 +59,6 @@ module DeviceAPI
       # @return (Boolean) true if the device is trusted, otherwise false
       def trusted?
         IDevice.trusted?(serial)
-      end
-
-      # Get the app bundle ID from the specified app
-      # @return [String] app bundle id
-      def package_name(app)
-        app_info = Plistutil.get_bundle_id_from_app(app)
-        app_info['CFBundleIdentifier']
-      end
-
-      # Get the app version from the specified app
-      # @return [String] app version
-      def app_version_number(app)
-        app_info = Plistutil.get_bundle_id_from_app(app)
-        app_info['CFBundleVersion']
       end
 
       # Get the IP Address from the device
