@@ -20,7 +20,7 @@ module DeviceAPI
         if DeviceAPI::IOS::IDeviceInstaller.package_installed?( serial: serial, package: ipaddress_bundle_id )
           return true
         else
-          raise IPAddressError.new('IP Address package not installed: Please see https://github.com/bbc/ios-test-helper')
+          warn IPAddressError.new('IP Address package not installed: Please see https://github.com/bbc/ios-test-helper')
         end
       end
 
@@ -28,7 +28,7 @@ module DeviceAPI
       # @param [String] serial serial of the target device
       # @return [String] IP Address if found
       def self.address(serial)
-        installed?(serial)
+        return nil unless installed?(serial)
         result = IDeviceDebug.run(serial: serial, bundle_id: ipaddress_bundle_id )
 
         ip_address = nil
