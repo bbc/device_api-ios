@@ -1,7 +1,7 @@
 # DeviceAPI-IOS
 
 
-*DeviceAPI-IOS* is the iOS implementation of *DeviceAPI* - an initiative to allow full automation of device activities
+*DeviceAPI-IOS* is the iOS implementation of *DeviceAPI* - an initiative to allow full automation of device activities. For a full list of release notes, see the [change log](CHANGELOG.md)
 
 ## Dependencies
 
