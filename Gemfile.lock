@@ -1,16 +1,18 @@
+PATH
+  remote: .
+  specs:
+    device_api-ios (1.0.6)
+      device_api (>= 1.0, < 2.0)
+      ios-devices (>= 0.2)
+      ox (>= 2.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    coderay (1.1.0)
-    device_api (1.0.1)
+    device_api (1.0.2)
     diff-lcs (1.2.5)
     ios-devices (0.2.1)
-    method_source (0.8.2)
-    ox (2.2.1)
-    pry (0.10.2)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
+    ox (2.4.9)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -24,14 +26,13 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
-    slop (3.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  device_api (>= 1.0.0)
-  ios-devices
-  ox
-  pry
+  device_api-ios!
   rspec
+
+BUNDLED WITH
+   1.14.3

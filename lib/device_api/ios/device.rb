@@ -105,6 +105,10 @@ module DeviceAPI
         end
       end
 
+      def list_installed_packages
+        IDeviceInstaller.list_installed_packages(serial)
+      end
+
       private
 
       def get_prop(key)
