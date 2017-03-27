@@ -10,6 +10,8 @@
 
 **Merged pull requests:**
 
+- Add list\_installed\_packages method [\#25](https://github.com/bbc/device_api-ios/pull/25) ([jrmhaig](https://github.com/jrmhaig))
+- Added changelog [\#24](https://github.com/bbc/device_api-ios/pull/24) ([jonpwilson](https://github.com/jonpwilson))
 - Not having the IP address package installed is no longer a blocker [\#23](https://github.com/bbc/device_api-ios/pull/23) ([jonpwilson](https://github.com/jonpwilson))
 
 ## [v1.0.5](https://github.com/bbc/device_api-ios/tree/v1.0.5) (2016-02-18)
