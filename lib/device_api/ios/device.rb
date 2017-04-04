@@ -109,6 +109,15 @@ module DeviceAPI
         IDeviceInstaller.list_installed_packages(serial)
       end
 
+      # Reboot the device
+      def reboot
+        restart
+      end
+
+      def restart
+        IDeviceDiagnostics.reboot(serial)
+      end
+
       private
 
       def get_prop(key)
