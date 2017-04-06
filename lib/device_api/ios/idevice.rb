@@ -15,11 +15,11 @@ module DeviceAPI
         raise IDeviceCommandError.new(result.stderr) if result.exit != 0
 
         lines = result.stdout.split("\n")
-        results = []
+        results = {}
 
         lines.each do |ln|
           if /[0-9a-zA-Z].*/.match(ln)
-            results.push(ln => execute_with_timeout_and_retry("ideviceinfo -u #{ln} -k DeviceName").stdout.split("\n"))
+            results[ln] = execute_with_timeout_and_retry("ideviceinfo -u #{ln} -k DeviceName").stdout.strip
           end
         end
         results

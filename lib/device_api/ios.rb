@@ -12,10 +12,9 @@ module DeviceAPI
 
     # Returns an array of connected iOS devices
     def self.devices
-      IDevice.devices.map do |d|
-        if d.keys.first
-          DeviceAPI::IOS::Device.new(serial: d.keys.first, display: d.values.flatten.first, state: 'ok')
-        end
+      devs = IDevice.devices
+      devs.keys.map do |serial|
+        DeviceAPI::IOS::Device.new(serial: serial, display: devs[serial], state: 'ok')
       end
     end
 

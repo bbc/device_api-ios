@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'device_api-ios'
-  s.version     = '1.0.8'
+  s.version     = '1.1.0'
   s.date        = Time.now.strftime("%Y-%m-%d")
   s.summary     = 'IOS Device Management API'
   s.description = 'iOS implementation of DeviceAPI'
