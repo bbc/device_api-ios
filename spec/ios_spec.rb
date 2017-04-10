@@ -7,12 +7,9 @@ describe DeviceAPI::IOS do
       allow(Open3).to receive(:capture3).with('ideviceinfo -u 12345678 -k DeviceName').and_return( [ "Device-1\n", '', Struct.new(:exitstatus).new(0) ] )
       allow(Open3).to receive(:capture3).with('ideviceinfo -u 23451234 -k DeviceName').and_return( [ "Device-2\n", '', Struct.new(:exitstatus).new(0) ] )
 
-      expect(DeviceAPI::IOS.devices).to match_array(
-        [
-          DeviceAPI::IOS::Device.new('12345678'),
-          DeviceAPI::IOS::Device.new('23451234')
-        ]
-      )
+      devices = DeviceAPI::IOS.devices
+      expect(devices.length).to eq 2
+      expect(devices.map{|d| d.serial}).to match_array(['12345678', '23451234'])
     end
 
     it 'detects an empty list of devices' do

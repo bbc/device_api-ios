@@ -3,6 +3,7 @@ require 'device_api/ios/device'
 require 'device_api/ios/idevice'
 require 'device_api/ios/idevicename'
 require 'device_api/ios/idevicescreenshot'
+require 'device_api/ios/idevicediagnostics'
 require 'ios/devices'
 
 # DeviceAPI - an interface to allow for automation of devices
