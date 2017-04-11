@@ -125,7 +125,7 @@ module DeviceAPI
       end
 
       def restart
-        IDeviceDiagnostics.reboot(serial)
+        IDeviceDiagnostics.restart(serial)
       end
 
       private
