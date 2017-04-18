@@ -2,6 +2,8 @@ require 'device_api/device'
 require 'device_api/ios/device'
 require 'device_api/ios/idevice'
 require 'device_api/ios/idevicename'
+require 'device_api/ios/idevicescreenshot'
+require 'device_api/ios/idevicediagnostics'
 require 'ios/devices'
 
 # DeviceAPI - an interface to allow for automation of devices
@@ -10,8 +12,14 @@ module DeviceAPI
   module IOS
     # Namespace for the Device object.
     class Device < DeviceAPI::Device
+      attr_accessor :qualifier
+      def self.create options = {}
+        self.new(options)
+      end
+
       def initialize(options = {})
-        @serial = options[:serial]
+        @qualifier = options[:qualifier]
+        @serial = options[:serial] || options[:qualifier]
         @state = options[:state]
       end
 
@@ -47,6 +55,12 @@ module DeviceAPI
       # @return (String) iOS device class
       def device_class
         get_prop('DeviceClass')
+      end
+
+      # Capture screenshot on device
+      def screenshot(args = {})
+        args[:device_id] = serial
+        IDeviceScreenshot.capture(args)
       end
 
       # Get the IMEI number of the device
@@ -107,6 +121,15 @@ module DeviceAPI
 
       def list_installed_packages
         IDeviceInstaller.list_installed_packages(serial)
+      end
+
+      # Reboot the device
+      def reboot
+        restart
+      end
+
+      def restart
+        IDeviceDiagnostics.restart(serial)
       end
 
       private

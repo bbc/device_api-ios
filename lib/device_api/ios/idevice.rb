@@ -15,11 +15,11 @@ module DeviceAPI
         raise IDeviceCommandError.new(result.stderr) if result.exit != 0
 
         lines = result.stdout.split("\n")
-        results = []
+        results = {}
 
         lines.each do |ln|
           if /[0-9a-zA-Z].*/.match(ln)
-            results.push(ln => execute_with_timeout_and_retry("ideviceinfo -u #{ln} -k DeviceName").stdout.split("\n"))
+            results[ln] = execute_with_timeout_and_retry("ideviceinfo -u #{ln} -k DeviceName").stdout.strip
           end
         end
         results
@@ -31,8 +31,8 @@ module DeviceAPI
       def self.trusted?(device_id)
         result = execute("ideviceinfo -u '#{device_id}'")
 
-        return true if result.exit == 0 && !result.stdout.split("\n")[0].match('Usage')
-        false
+        lines = result.stdout.split("\n")
+        result.exit == 0 and lines.length > 0 and not lines[0].match('Usage')
       end
 
       # Returns a Hash containing properties of the specified device using idevice_id.
