@@ -14,8 +14,14 @@ module DeviceAPI
 
     # Namespace for the Device object.
     class Device < DeviceAPI::Device
+      attr_accessor :qualifier
+      def self.create options = {}
+        self.new(options)
+      end
+
       def initialize(options = {})
-        @serial = options[:serial]
+        @qualifier = options[:qualifier]
+        @serial = options[:serial] || options[:qualifier]
         @state = options[:state]
       end
 
