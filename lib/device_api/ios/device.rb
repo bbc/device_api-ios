@@ -10,8 +10,6 @@ require 'ios/devices'
 module DeviceAPI
   # iOS component of DeviceAPI
   module IOS
-    attr_accessor :serial
-
     # Namespace for the Device object.
     class Device < DeviceAPI::Device
       attr_accessor :qualifier
