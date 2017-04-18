@@ -1,6 +1,6 @@
 require 'device_api/ios/idevice'
 
-describe DeviceAPI::IOS::IDevice do
+RSpec.describe DeviceAPI::IOS::IDevice do
   describe '.devices' do
     it 'detects devices attached to device' do
       allow(Open3).to receive(:capture3).with('idevice_id -l').and_return( [ "12345678\n23451234\n", '', Struct.new(:exitstatus).new(0) ] )

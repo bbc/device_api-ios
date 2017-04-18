@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'device_api', '>=1.0', '<2.0'
   s.add_runtime_dependency 'ios-devices', '>=0.2'
   s.add_runtime_dependency 'ox', '>=2.1.0'
-  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec', '~> 3.5'
 end

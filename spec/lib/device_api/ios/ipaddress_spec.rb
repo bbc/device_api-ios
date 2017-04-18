@@ -1,7 +1,7 @@
 require 'device_api/execution'
 require 'device_api/ios/ipaddress'
 
-describe DeviceAPI::IOS::IPAddress do
+RSpec.describe DeviceAPI::IOS::IPAddress do
 
   describe '.address' do
     it 'gets the correct IP Address' do

@@ -1,6 +1,6 @@
 require 'device_api/ios/ideviceinstaller'
 
-describe DeviceAPI::IOS::IDeviceInstaller do
+RSpec.describe DeviceAPI::IOS::IDeviceInstaller do
   describe '.list_installed_packages' do
     it 'returns a list of installed apps' do
       output = <<end
