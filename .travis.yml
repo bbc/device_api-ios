@@ -1,6 +1,6 @@
 language: ruby
 rvm:
   - 2.2
-  - jruby
+  - 2.3
 
 script: bundle exec rspec
