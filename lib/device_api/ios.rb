@@ -14,16 +14,16 @@ module DeviceAPI
     def self.devices
       devs = IDevice.devices
       devs.keys.map do |serial|
-        DeviceAPI::IOS::Device.new(serial: serial, display: devs[serial], state: 'ok')
+        DeviceAPI::IOS::Device.new(qualifier: serial, display: devs[serial], state: 'ok')
       end
     end
 
     # Retrieve a Device object by serial ID
-    def self.device(serial)
-      if serial.to_s.empty?
-        raise DeviceAPI::BadSerialString.new("Serial was '#{ serial.nil? ? 'nil' : serial }'")
+    def self.device(qualifier)
+      if qualifier.to_s.empty?
+        raise DeviceAPI::BadSerialString.new("Serial was '#{ qualifier.nil? ? 'nil' : qualifier }'")
       end
-      DeviceAPI::IOS::Device.new(serial: serial, state: 'device')
+      DeviceAPI::IOS::Device.new(qualifier: qualifer, state: 'device')
     end
   end
 end
