@@ -23,7 +23,7 @@ module DeviceAPI
       if qualifier.to_s.empty?
         raise DeviceAPI::BadSerialString.new("Serial was '#{ qualifier.nil? ? 'nil' : qualifier }'")
       end
-      DeviceAPI::IOS::Device.new(qualifier: qualifer, state: 'device')
+      DeviceAPI::IOS::Device.new(qualifier: qualifier, state: 'device')
     end
   end
 end
