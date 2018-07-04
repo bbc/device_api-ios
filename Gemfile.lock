@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    device_api-ios (1.1.0)
+    device_api-ios (1.1.1)
       device_api (>= 1.0, < 2.0)
       ios-devices (>= 0.2)
       ox (>= 2.1.0)
