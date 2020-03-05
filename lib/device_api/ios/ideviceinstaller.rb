@@ -45,7 +45,7 @@ module DeviceAPI
 
         raise IDeviceInstallerError.new(result.stderr) if result.exit != 0
 
-        lines = result.stdout.split("\n").map { |line| line.gsub('-', '').strip }
+        lines = result.stdout.encode('UTF-8', :invalid => :replace).split("\n").map { |line| line.gsub('-', '').strip }
 
         return true if lines.last.match('Complete')
         false
@@ -59,7 +59,7 @@ module DeviceAPI
 
         raise IDeviceInstallerError.new(result.stderr) if result.exit != 0
 
-        lines = result.stdout.split("\n")
+        lines = result.stdout.encode('UTF-8', :invalid => :replace).split("\n")
         lines.shift
         packages = {}
         lines.each do |line|

@@ -5,7 +5,7 @@ RSpec.describe DeviceAPI::IOS::IDeviceInstaller do
     it 'returns a list of installed apps' do
       output = <<end
 Total: 2 apps
-uk.co.bbc.titan.IPAddress - IPAddress 1
+uk.co.bbc.titan.IPAddress 'é', 'ö' or 'ĉ', ♫♫ - IPAddress 1
 uk.co.bbc.iplayer - BBC iPlayer 4.10.0.196
 end
       allow(Open3).to receive(:capture3) do
